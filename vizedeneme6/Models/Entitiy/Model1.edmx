@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmyoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Admin">
+          <Key>
+            <PropertyRef Name="adminid" />
+          </Key>
+          <Property Name="adminid" Type="int" Nullable="false" />
+          <Property Name="eposta" Type="varchar" MaxLength="50" />
+          <Property Name="sifre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_Bolumler">
+          <Key>
+            <PropertyRef Name="bolumid" />
+          </Key>
+          <Property Name="bolumid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolumad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_Ogrenci">
+          <Key>
+            <PropertyRef Name="ogrid" />
+          </Key>
+          <Property Name="ogrid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ograd" Type="varchar" MaxLength="50" />
+          <Property Name="ogrsoyad" Type="varchar" MaxLength="50" />
+          <Property Name="mezuniyet" Type="varchar" MaxLength="50" />
+          <Property Name="kredi" Type="float" />
+          <Property Name="bolumid" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Ogretmen">
+          <Key>
+            <PropertyRef Name="ogretid" />
+          </Key>
+          <Property Name="ogretid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ogretmenad" Type="varchar" MaxLength="50" />
+          <Property Name="ogretmensoyad" Type="varchar" MaxLength="50" />
+          <Property Name="bolumid" Type="int" />
+          <Property Name="emekli" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Tbl_Ogrenci_Tbl_Bolumler">
+          <End Role="Tbl_Bolumler" Type="Self.Tbl_Bolumler" Multiplicity="0..1" />
+          <End Role="Tbl_Ogrenci" Type="Self.Tbl_Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bolumler">
+              <PropertyRef Name="bolumid" />
+            </Principal>
+            <Dependent Role="Tbl_Ogrenci">
+              <PropertyRef Name="bolumid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Ogretmen_Tbl_Bolumler">
+          <End Role="Tbl_Bolumler" Type="Self.Tbl_Bolumler" Multiplicity="0..1" />
+          <End Role="Tbl_Ogretmen" Type="Self.Tbl_Ogretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bolumler">
+              <PropertyRef Name="bolumid" />
+            </Principal>
+            <Dependent Role="Tbl_Ogretmen">
+              <PropertyRef Name="bolumid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmyoModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Bolumler" EntityType="Self.Tbl_Bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Ogrenci" EntityType="Self.Tbl_Ogrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Ogretmen" EntityType="Self.Tbl_Ogretmen" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Ogrenci_Tbl_Bolumler" Association="Self.FK_Tbl_Ogrenci_Tbl_Bolumler">
+            <End Role="Tbl_Bolumler" EntitySet="Tbl_Bolumler" />
+            <End Role="Tbl_Ogrenci" EntitySet="Tbl_Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Ogretmen_Tbl_Bolumler" Association="Self.FK_Tbl_Ogretmen_Tbl_Bolumler">
+            <End Role="Tbl_Bolumler" EntitySet="Tbl_Bolumler" />
+            <End Role="Tbl_Ogretmen" EntitySet="Tbl_Ogretmen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmyoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Admin">
+          <Key>
+            <PropertyRef Name="adminid" />
+          </Key>
+          <Property Name="adminid" Type="Int32" Nullable="false" />
+          <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Bolumler">
+          <Key>
+            <PropertyRef Name="bolumid" />
+          </Key>
+          <Property Name="bolumid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolumad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Ogrenci" Relationship="Self.FK_Tbl_Ogrenci_Tbl_Bolumler" FromRole="Tbl_Bolumler" ToRole="Tbl_Ogrenci" />
+          <NavigationProperty Name="Tbl_Ogretmen" Relationship="Self.FK_Tbl_Ogretmen_Tbl_Bolumler" FromRole="Tbl_Bolumler" ToRole="Tbl_Ogretmen" />
+        </EntityType>
+        <EntityType Name="Tbl_Ogrenci">
+          <Key>
+            <PropertyRef Name="ogrid" />
+          </Key>
+          <Property Name="ogrid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ograd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ogrsoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mezuniyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kredi" Type="Double" />
+          <Property Name="bolumid" Type="Int32" />
+          <NavigationProperty Name="Tbl_Bolumler" Relationship="Self.FK_Tbl_Ogrenci_Tbl_Bolumler" FromRole="Tbl_Ogrenci" ToRole="Tbl_Bolumler" />
+        </EntityType>
+        <EntityType Name="Tbl_Ogretmen">
+          <Key>
+            <PropertyRef Name="ogretid" />
+          </Key>
+          <Property Name="ogretid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ogretmenad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ogretmensoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bolumid" Type="Int32" />
+          <Property Name="emekli" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Bolumler" Relationship="Self.FK_Tbl_Ogretmen_Tbl_Bolumler" FromRole="Tbl_Ogretmen" ToRole="Tbl_Bolumler" />
+        </EntityType>
+        <Association Name="FK_Tbl_Ogrenci_Tbl_Bolumler">
+          <End Role="Tbl_Bolumler" Type="Self.Tbl_Bolumler" Multiplicity="0..1" />
+          <End Role="Tbl_Ogrenci" Type="Self.Tbl_Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bolumler">
+              <PropertyRef Name="bolumid" />
+            </Principal>
+            <Dependent Role="Tbl_Ogrenci">
+              <PropertyRef Name="bolumid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Ogretmen_Tbl_Bolumler">
+          <End Role="Tbl_Bolumler" Type="Self.Tbl_Bolumler" Multiplicity="0..1" />
+          <End Role="Tbl_Ogretmen" Type="Self.Tbl_Ogretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bolumler">
+              <PropertyRef Name="bolumid" />
+            </Principal>
+            <Dependent Role="Tbl_Ogretmen">
+              <PropertyRef Name="bolumid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmyoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" />
+          <EntitySet Name="Tbl_Bolumler" EntityType="Self.Tbl_Bolumler" />
+          <EntitySet Name="Tbl_Ogrenci" EntityType="Self.Tbl_Ogrenci" />
+          <EntitySet Name="Tbl_Ogretmen" EntityType="Self.Tbl_Ogretmen" />
+          <AssociationSet Name="FK_Tbl_Ogrenci_Tbl_Bolumler" Association="Self.FK_Tbl_Ogrenci_Tbl_Bolumler">
+            <End Role="Tbl_Bolumler" EntitySet="Tbl_Bolumler" />
+            <End Role="Tbl_Ogrenci" EntitySet="Tbl_Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Ogretmen_Tbl_Bolumler" Association="Self.FK_Tbl_Ogretmen_Tbl_Bolumler">
+            <End Role="Tbl_Bolumler" EntitySet="Tbl_Bolumler" />
+            <End Role="Tbl_Ogretmen" EntitySet="Tbl_Ogretmen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmyoModelStoreContainer" CdmEntityContainer="SmyoEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SmyoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Admin">
+            <EntityTypeMapping TypeName="SmyoModel.Tbl_Admin">
+              <MappingFragment StoreEntitySet="Tbl_Admin">
+                <ScalarProperty Name="adminid" ColumnName="adminid" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Bolumler">
+            <EntityTypeMapping TypeName="SmyoModel.Tbl_Bolumler">
+              <MappingFragment StoreEntitySet="Tbl_Bolumler">
+                <ScalarProperty Name="bolumid" ColumnName="bolumid" />
+                <ScalarProperty Name="bolumad" ColumnName="bolumad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Ogrenci">
+            <EntityTypeMapping TypeName="SmyoModel.Tbl_Ogrenci">
+              <MappingFragment StoreEntitySet="Tbl_Ogrenci">
+                <ScalarProperty Name="ogrid" ColumnName="ogrid" />
+                <ScalarProperty Name="ograd" ColumnName="ograd" />
+                <ScalarProperty Name="ogrsoyad" ColumnName="ogrsoyad" />
+                <ScalarProperty Name="mezuniyet" ColumnName="mezuniyet" />
+                <ScalarProperty Name="kredi" ColumnName="kredi" />
+                <ScalarProperty Name="bolumid" ColumnName="bolumid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Ogretmen">
+            <EntityTypeMapping TypeName="SmyoModel.Tbl_Ogretmen">
+              <MappingFragment StoreEntitySet="Tbl_Ogretmen">
+                <ScalarProperty Name="ogretid" ColumnName="ogretid" />
+                <ScalarProperty Name="ogretmenad" ColumnName="ogretmenad" />
+                <ScalarProperty Name="ogretmensoyad" ColumnName="ogretmensoyad" />
+                <ScalarProperty Name="bolumid" ColumnName="bolumid" />
+                <ScalarProperty Name="emekli" ColumnName="emekli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

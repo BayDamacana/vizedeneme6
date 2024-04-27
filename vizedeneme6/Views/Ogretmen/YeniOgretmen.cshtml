@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "YeniOgretmen";
+    Layout = "~/Views/Shared/Mainlayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Öğretmen Adı</label>
+        <input type="text" class="form-control" name="ogretmenad" />
+
+        <label>Öğretmen Soyadı</label>
+        <input type="text" class="form-control" name="ogretmensoyad" />
+
+        <label>Bölüm ID</label>
+        <input type="text" class="form-control" name="bolumid" />
+
+        <label>EMEKLİLİK DURUMU</label>
+        <input type="text" class="form-control" name="emekli" />
+
+        
+        <div>
+            <button class="btn btn-info">EKLE</button>
+        </div>
+    </div>
+</form>

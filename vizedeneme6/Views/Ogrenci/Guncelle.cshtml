@@ -1,0 +1,33 @@
+﻿
+@model vizedeneme6.Models.Entitiy.Tbl_Ogrenci
+@{
+    ViewBag.Title = "Guncelle";
+    Layout = "~/Views/Shared/Mainlayout.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Ogrenci", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.ogrid)
+        @Html.TextBoxFor(m => m.ogrid, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.ograd)
+        @Html.TextBoxFor(m => m.ograd, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.ogrsoyad)
+        @Html.TextBoxFor(m => m.ogrsoyad, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.mezuniyet)
+        @Html.TextBoxFor(m => m.mezuniyet, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.kredi)
+        @Html.TextBoxFor(m => m.kredi, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.bolumid)
+        @Html.TextBoxFor(m => m.ogrid, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-warning">GÜNCELLE</button>
+    </div>
+}
+
